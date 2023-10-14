@@ -55,7 +55,6 @@ if not Path(file_path).exists():
 
 # set cmudict path
 nltk_data_path = str(Path(base_dir).resolve())
-# os.environ["NLTK_DATA"] = nltk_data_path
 nltk.data.path.append(nltk_data_path)
 
 # load cmudict
@@ -156,7 +155,6 @@ def main():
     3. Exit
 
     Please enter a number"""
-    # user_input = "2"
     user_input = typer.prompt(dedent(typer_prompt))
 
     if user_input == "1":
@@ -175,9 +173,4 @@ def main():
 
 
 if __name__ == "__main__":
-    # validate_haiku("An old silent pond...", "A frog jumps into the pond", "Splash! Silence again.")
-    # validate_haiku("Nightfall—", "too dark to read the page", "too cold.")
-    # validate_haiku()
-    # generate_haiku()
-    # main()
     typer.run(main)
