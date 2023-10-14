@@ -4,8 +4,6 @@
 import haiku_generator
 from hypothesis import given, strategies as st
 
-# TODO: replace st.nothing() with an appropriate strategy
-
 
 @given(line=st.text(alphabet='bcdfghjklmnpqrstvwxyzaeiouy', min_size=1, max_size=20))
 def test_fuzz_syllables_in_line(line):
