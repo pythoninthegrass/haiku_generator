@@ -5,6 +5,7 @@ import json
 import nltk
 import os
 import random
+import string
 import typer
 from pathlib import Path
 from nltk.corpus import cmudict
@@ -85,7 +86,13 @@ def syllables_in_line(line):
         return None
 
     # remove punctuation
-    words = [word.strip(",.?!—") for word in words]
+    regular_punc = list(string.punctuation)
+    special_punc = ["—", "<", ">"]
+    punc = regular_punc + special_punc
+    words = [word.strip("".join(punc)) for word in words]
+
+    # remove empty strings
+    words = [word for word in words if word]
 
     # count syllables in each word
     syllables = [syllables_in_word(word) for word in words]
