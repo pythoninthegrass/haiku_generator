@@ -30,6 +30,8 @@ NOTES
 
 app = typer.Typer()
 
+# TODO: setup short circuit if no internet connection
+
 # setup httpx client
 headers = {
     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:109.0) Gecko/20100101 Firefox/117.0"
