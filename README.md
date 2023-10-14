@@ -40,8 +40,10 @@ poetry run python haiku_generator.py
 ## Development
 * Testing
     ```bash
-    # generate tests
+    # activate virtual environment
     poetry shell
+    
+    # generate tests
     hypothesis write haiku_generator.validate_haiku > test_validate_haiku.py
 
     # run specific test
