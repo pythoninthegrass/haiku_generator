@@ -39,9 +39,9 @@ jobs:
       - name: Pre-build image and run command in dev container
         uses: devcontainers/ci@v0.3
         with:
-          imageName: ghcr.io/pythoninthegrass/mvp
-          cacheFrom: ghcr.io/pythoninthegrass/mvp
+          imageName: ghcr.io/pythoninthegrass/haiku_generator
+          cacheFrom: ghcr.io/pythoninthegrass/haiku_generator
           noCache: false
           push: always
           runCmd: |
-            make help
+            echo "Hello, haiku enthusiast!"
