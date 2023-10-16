@@ -101,11 +101,7 @@ chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | tee /etc/apt/sources.list.d/github-cli.list > /dev/null
 apt update && apt install gh -y
 apt remove dpkg -y
-rm -rf /var/lib/apt/lists/*
-
-# fzf
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-yes | ~/.fzf/install
+rm -rf /var/lib/apt/lists/*å
 EOF
 
 USER $USER_NAME
@@ -118,8 +114,6 @@ HISTFILESIZE=100
 HISTSIZE=100
 
 stty -ixon
-
-[ -f ~/.fzf.bash ] && . ~/.fzf.bash
 
 # aliases
 alias ..='cd ../'
