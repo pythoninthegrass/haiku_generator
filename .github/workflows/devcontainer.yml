@@ -41,7 +41,7 @@ jobs:
         with:
           imageName: ghcr.io/pythoninthegrass/haiku_generator
           cacheFrom: ghcr.io/pythoninthegrass/haiku_generator
-          noCache: false
+          noCache: true
           push: always
           runCmd: |
             echo "Hello, haiku enthusiast!"
