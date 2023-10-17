@@ -3,9 +3,9 @@
 name: 'devcontainer'
 on: # rebuild any PRs and dev branch changes
   pull_request:
-  # push:
-  #   branches:
-  #     - dev
+  push:
+    branches:
+      - dev
   schedule: # rebuild once a week at midnight on saturday
     - cron: '0 0 * * 6'
 
