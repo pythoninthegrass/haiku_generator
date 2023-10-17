@@ -117,4 +117,7 @@ ENV PATH=$VENV_PATH/bin:$HOME/.local/bin:$PATH
 # port needed by app
 EXPOSE 8000
 
-CMD ["sleep", "infinity"]
+# CMD ["sleep", "infinity"]
+
+ENTRYPOINT [ "/app/haiku_generator.py" ]
+CMD [ "--help" ]
