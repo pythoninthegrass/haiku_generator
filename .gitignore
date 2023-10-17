@@ -1,6 +1,7 @@
 # ETC
 **/nltk_data/*
 words_dictionary.json
+megalinter-reports/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
