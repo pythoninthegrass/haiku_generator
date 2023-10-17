@@ -32,5 +32,12 @@
   "forwardPorts": [
     8000,
     8080
-  ]
+  ],
+  "features": {
+    "docker-in-docker": "latest",
+    "github-cli": "latest"
+  },
+  "hostRequirements": {
+    "memory": "4gb"
+  }
 }
