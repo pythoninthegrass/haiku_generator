@@ -32,20 +32,6 @@ jobs:
       - name: Checkout (GitHub)
         uses: actions/checkout@v4
 
-      # - name: Set up Node.js
-      #   uses: actions/setup-node@v3
-      #   with:
-      #     node-version: 18
-
-      # - name: Install devcontainer CLI
-      #   run: npm install -g @devcontainers/cli
-
-      # - name: Start devcontainer
-      #   run: devcontainer up --config .devcontainer/devcontainer.json --workspace-folder .
-
-      # - name: Build devcontainer
-      #   run: devcontainer build --config .devcontainer/devcontainer.json --workspace-folder .
-
       - name: Docker meta
         id: meta
         uses: docker/metadata-action@v5
@@ -68,6 +54,6 @@ jobs:
       - name: Pre-build dev container image
         uses: devcontainers/ci@v0.3
         with:
-          imageName: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          imageName: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:unstable
           cacheFrom: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           push: always
