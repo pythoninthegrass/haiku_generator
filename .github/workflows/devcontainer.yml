@@ -1,0 +1,37 @@
+# https://github.com/devcontainers/ci/blob/main/docs/github-action.md
+
+name: 'devcontainer'
+on: # rebuild any PRs and dev branch changes
+  pull_request:
+  push:
+    branches:
+      - dev
+  schedule: # rebuild once a week at midnight on saturday
+    - cron: '0 0 * * 6'
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  devcontainer:
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        platform:
+          - linux/amd64
+          - linux/arm64
+
+    runs-on: ${{ matrix.os }}
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Pre-build dev container image
+        uses: devcontainers/ci@v0.3
+        with:
+          imageName: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          cacheFrom: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          push: always
