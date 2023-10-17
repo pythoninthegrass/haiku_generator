@@ -57,7 +57,4 @@ jobs:
           imageName: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           cacheFrom: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           push: always
-          imageTag:
-            - dev
-            - devcontainer
-            - ${{ github.sha }}
+          imageTag: dev,devcontainer,${{ github.sha }}
