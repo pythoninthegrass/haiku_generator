@@ -66,18 +66,15 @@ ARG DEBIAN_FRONTEND=noninteractive
 # install dependencies
 RUN apt -qq update && apt -qq install \
     --no-install-recommends -y \
-    bat \
     curl \
     dpkg \
     git \
     iputils-ping \
-    less \
     lsof \
     make \
     p7zip \
     perl \
     shellcheck \
-    tldr \
     tree \
     && rm -rf /var/lib/apt/lists/*
 

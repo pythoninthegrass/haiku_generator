@@ -34,7 +34,6 @@
     8080
   ],
   "features": {
-    "docker-in-docker": "latest",
     "github-cli": "latest"
   },
   "hostRequirements": {
