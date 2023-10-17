@@ -71,6 +71,7 @@ RUN apt -qq update && apt -qq install \
     dpkg \
     git \
     iputils-ping \
+    less \
     lsof \
     make \
     p7zip \
@@ -82,13 +83,6 @@ RUN apt -qq update && apt -qq install \
 
 RUN groupadd $USER_NAME \
     && useradd -m $USER_NAME -g $USER_GROUP
-
-# create read/write dirs
-RUN <<EOF
-#!/usr/bin/env bash
-mkdir -p /app/{certs,staticfiles}
-chown -R "${USER_NAME}:${USER_GROUP}" /app/
-EOF
 
 COPY --from=builder --chown=${USER_NAME}:${USER_GROUP} $VENV $VENV
 
@@ -110,6 +104,8 @@ alias ll='ls -la --color=auto'
 EOF
 
 WORKDIR /app
+
+COPY --chown=${USER_NAME}:${USER_GROUP} . .
 
 # $PATH
 ENV PATH=$VENV_PATH/bin:$HOME/.local/bin:$PATH

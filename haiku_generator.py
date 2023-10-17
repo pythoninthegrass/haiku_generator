@@ -12,9 +12,10 @@ from nltk.corpus import cmudict
 from textwrap import dedent
 from typing import Annotated
 
-app = typer.Typer()
+# script directory
+script_dir = os.path.dirname(__file__)
 
-# TODO: setup short circuit if no internet connection
+app = typer.Typer()
 
 # setup httpx client
 headers = {
@@ -22,27 +23,43 @@ headers = {
 }
 client = httpx.Client()
 
-# download english-words/words_dictionary.json
-if not Path("./words_dictionary.json").is_file():
-    typer.echo("Downloading words_dictionary.json...")
-    raw_json = client.get("https://raw.githubusercontent.com/dwyl/english-words/master/words_dictionary.json", headers=headers)
-    with open("./words_dictionary.json", "w") as f:
-        json.dump(raw_json.json(), f)
 
-# download cmudict
-base_dir = Path("./nltk_data")
-file_path = Path(f"{base_dir}/corpora/cmudict")
-if not Path(file_path).exists():
-    typer.echo("Downloading cmudict...")
-    nltk.download("cmudict", download_dir=base_dir)
-    Path(f"{base_dir}/corpora/cmudict.zip").unlink()
+def check_internet_connection():
+    """Check internet connection"""
+    try:
+        client.get("https://google.com", headers=headers)
+    except httpx.ConnectError:
+        typer.echo("No internet connection! Please connect to the internet and try again.")
+        raise typer.Exit()
 
-# set cmudict path
-nltk_data_path = str(Path(base_dir).resolve())
-nltk.data.path.append(nltk_data_path)
 
-# load cmudict
-d = cmudict.dict()
+def download_dependencies():
+    """Download cmudict and words_dictionary.json"""
+
+    # download english-words/words_dictionary.json
+    if not Path(f"{script_dir}/words_dictionary.json").is_file():
+        check_internet_connection()
+        typer.echo("Downloading words_dictionary.json...")
+        raw_json = client.get("https://raw.githubusercontent.com/dwyl/english-words/master/words_dictionary.json", headers=headers)
+        with open("./words_dictionary.json", "w") as f:
+            json.dump(raw_json.json(), f)
+
+    # download cmudict
+    base_dir = Path(f"{script_dir}/nltk_data")
+    file_path = Path(f"{base_dir}/corpora/cmudict")
+    if not Path(file_path).exists():
+        check_internet_connection()
+        typer.echo("Downloading cmudict...")
+        nltk.download("cmudict", download_dir=base_dir)
+        Path(f"{base_dir}/corpora/cmudict.zip").unlink()
+
+    # set cmudict path
+    nltk_data_path = str(Path(base_dir).resolve())
+    nltk.data.path.append(nltk_data_path)
+
+    # load cmudict
+    global d
+    d = cmudict.dict()
 
 
 def syllables_in_word(word):
@@ -147,16 +164,8 @@ def main(
                                                          "-g", "--generate",
                                                          help="Generate a haiku"),
 ):
-    typer_prompt = """\
-    Welcome to the Haiku Generator!
-
-    Would you like to validate or generate a haiku?
-
-    1. validate
-    2. generate
-    3. exit
-
-    Please enter a number"""
+    # download cmudict and words_dictionary.json
+    download_dependencies()
 
     if validate:
         typer.echo("Validating haiku...")
@@ -169,6 +178,17 @@ def main(
         typer.echo("Generating haiku...")
         generate_haiku()
         return
+
+    typer_prompt = """\
+    Welcome to the Haiku Generator!
+
+    Would you like to validate or generate a haiku?
+
+    1. validate
+    2. generate
+    3. exit
+
+    Please enter a number"""
 
     user_input = typer.prompt(dedent(typer_prompt))
 

@@ -1,7 +1,6 @@
-**/nltk_data/*
-**/words_dictionary.json
 **/__pycache__
 **/.classpath
+**/.devcontainer
 **/.dockerignore
 **/.DS_Store
 **/.editorconfig
@@ -9,9 +8,12 @@
 **/.git
 **/.github
 **/.gitignore
+**/.pre-commit-config.yaml
 **/.project
 **/.settings
+**/.tool-versions
 **/.toolstarget
+**/.venv
 **/.vs
 **/.vscode
 **/*.*proj.user
@@ -29,6 +31,8 @@
 **/docker-compose*
 **/Dockerfile*
 **/img
+**/LICENSE
+**/nltk_data/*
 **/node_modules
 **/npm-debug.log
 **/obj
@@ -36,3 +40,4 @@
 **/secrets.dev.yaml
 **/terraform
 **/values.dev.yaml
+**/words_dictionary.json

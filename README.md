@@ -13,6 +13,11 @@ Simple haiku generator written in Python. Validates haiku syllable count and gen
 > afterlives abdicated  
 > taunts justifying  
 
+**okay, last one**
+> inexperienced  
+> felucca tarts remarriage  
+> prescribed bengali  
+
 ## Setup
 * Minimum requirements
   * [Python 3.11](https://www.python.org/downloads/)
