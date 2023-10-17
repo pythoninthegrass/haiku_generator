@@ -1,4 +1,4 @@
-# https://github.com/devcontainers/ci/blob/main/docs/github-action.md
+# https://docs.github.com/en/actions/publishing-packages/publishing-docker-images#publishing-images-to-github-packages
 
 name: 'docker'
 on: # rebuild any PRs and main branch changes
