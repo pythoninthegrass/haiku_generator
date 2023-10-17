@@ -51,11 +51,11 @@ poetry run python haiku_generator.py
 
  Usage: haiku_generator.py [OPTIONS]
 
-╭─ Options ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ --validate  -v        Validate a haiku                                                                                                                                            │
-│ --generate  -g        Generate a haiku                                                                                                                                            │
-│ --help                Show this message and exit.                                                                                                                                 │
-╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Options ────────────────────────────────────────────────────────────╮
+│ --validate  -v        Validate a haiku                               │
+│ --generate  -g        Generate a haiku                               │
+│ --help                Show this message and exit.                    │
+╰──────────────────────────────────────────────────────────────────────╯
 
 # override command (option) with `--validate` or `-v`
 λ docker run -it --rm ghcr.io/pythoninthegrass/haiku_generator:main -v
@@ -92,11 +92,11 @@ appuser@1d5cc39be76d:/app$ ./haiku_generator.py --help
 
  Usage: haiku_generator.py [OPTIONS]
 
-╭─ Options ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ --validate  -v        Validate a haiku                                                                                                                                            │
-│ --generate  -g        Generate a haiku                                                                                                                                            │
-│ --help                Show this message and exit.                                                                                                                                 │
-╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Options ────────────────────────────────────────────────────────────╮
+│ --validate  -v        Validate a haiku                               │
+│ --generate  -g        Generate a haiku                               │
+│ --help                Show this message and exit.                    │
+╰──────────────────────────────────────────────────────────────────────╯
 
 # run without any options
 λ docker run -it --rm --entrypoint=bash ghcr.io/pythoninthegrass/haiku_generator:main
