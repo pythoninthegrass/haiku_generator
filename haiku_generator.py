@@ -10,24 +10,7 @@ import typer
 from pathlib import Path
 from nltk.corpus import cmudict
 from textwrap import dedent
-
-"""
-haiku_generator
-
-This program will generate a haiku based on user input.
-
-USAGE
-    $ python haiku_generator.py
-
-NOTES
-    Follows Grammarly's rules for haiku:
-
-    Line 1: Five syllables
-    Line 2: Seven syllables
-    Line 3: Five syllables
-
-    https://www.grammarly.com/blog/how-to-write-haiku/
-"""
+from typing import Annotated
 
 app = typer.Typer()
 
@@ -108,9 +91,14 @@ def validate_haiku(first_line=None, second_line=None, third_line=None):
     second_line_syllables = syllables_in_line(second_line)
     third_line_syllables = syllables_in_line(third_line)
 
+    # strip whitespace
+    first_line = first_line.strip()
+    second_line = second_line.strip()
+    third_line = third_line.strip()
+
     match (first_line_syllables, second_line_syllables, third_line_syllables):
         case (5, 7, 5):
-            print("This is a haiku")
+            print("This is a haiku!")
             print(f"{first_line}\n{second_line}\n{third_line}")
         case (5, 7, _):
             print(f"This is not a traditional haiku. The third line has {third_line_syllables} syllables.")
@@ -151,17 +139,37 @@ def generate_haiku():
     print(f"{first_line}\n{second_line}\n{third_line}")
 
 
-def main():
+def main(
+    validate: Annotated[bool, "validate"] = typer.Option(False,
+                                                         "-v", "--validate",
+                                                         help="Validate a haiku"),
+    generate: Annotated[bool, "generate"] = typer.Option(False,
+                                                         "-g", "--generate",
+                                                         help="Generate a haiku"),
+):
     typer_prompt = """\
     Welcome to the Haiku Generator!
 
     Would you like to validate or generate a haiku?
 
-    1. Validate
-    2. Generate
-    3. Exit
+    1. validate
+    2. generate
+    3. exit
 
     Please enter a number"""
+
+    if validate:
+        typer.echo("Validating haiku...")
+        first_line = typer.prompt("Enter the first line")
+        second_line = typer.prompt("Enter the second line")
+        third_line = typer.prompt("Enter the third line")
+        validate_haiku(first_line, second_line, third_line)
+        return
+    elif generate:
+        typer.echo("Generating haiku...")
+        generate_haiku()
+        return
+
     user_input = typer.prompt(dedent(typer_prompt))
 
     if user_input == "1":
