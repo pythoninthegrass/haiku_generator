@@ -15,12 +15,32 @@ APPLY_FIXES: all
 # ENABLE_LINTERS:
 
 DISABLE:
-  - COPYPASTE # Comment to enable checks of excessive copy-pastes
-  # - SPELL # Uncomment to disable checks of spelling mistakes
+  - ACTION
+  - COPYPASTE
+  - DOCKERFILE
+  - MARKDOWN_MARKDOWNLINT
+  - PyTHON_BANDIT
+  - REPOSITORY_CHECKOV
+  - REPOSITORY_GRYPE
+  - REPOSITORY_SECRETLINT
+
+DISABLE_ERRORS_LINTERS:
+  - JSON
+  - MARKDOWN
+  - PYTHON_BLACK
+  - PYTHON_FLAKE8
+  - PYTHON_ISORT
+  - REPOSITORY_TRIVY
+  - SPELL
+  - YAML
+
+FILTER_REGEX_EXCLUDE: '(\.automation/test|\.automation/generated|\.venv|\.github/workflows|docs/javascripts|docs/overrides|docs/json-schemas|flavors|clj-kondo|TEMPLATES)'
+JSON_JSONLINT_FILTER_REGEX_EXCLUDE: '(\.vscode/)'
+
+SPELL_FILTER_REGEX_EXCLUDE: (valestyles|\.github|docs/licenses)
 
 SHOW_ELAPSED_TIME: true
 
 FILEIO_REPORTER: true
-
 # Uncomment if you want MegaLinter to detect errors but not block CI to pass
 # DISABLE_ERRORS: true

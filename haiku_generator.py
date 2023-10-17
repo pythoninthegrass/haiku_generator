@@ -29,7 +29,9 @@ def check_internet_connection():
     try:
         client.get("https://google.com", headers=headers)
     except httpx.ConnectError:
-        typer.echo("No internet connection! Please connect to the internet and try again.")
+        typer.echo(
+            "No internet connection! Please connect to the internet and try again."
+        )
         raise typer.Exit()
 
 
@@ -40,7 +42,10 @@ def download_dependencies():
     if not Path(f"{script_dir}/words_dictionary.json").is_file():
         check_internet_connection()
         typer.echo("Downloading words_dictionary.json...")
-        raw_json = client.get("https://raw.githubusercontent.com/dwyl/english-words/master/words_dictionary.json", headers=headers)
+        raw_json = client.get(
+            "https://raw.githubusercontent.com/dwyl/english-words/master/words_dictionary.json",
+            headers=headers,
+        )
         with open("./words_dictionary.json", "w") as f:
             json.dump(raw_json.json(), f)
 
