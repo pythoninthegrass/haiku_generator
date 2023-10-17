@@ -10,7 +10,8 @@ on: # rebuild any PRs and main branch changes
     - cron: '0 0 * * 6'
 
 env:
-  REGISTRY_IMAGE: ${{ github.repository }}
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
   build:
@@ -23,6 +24,10 @@ jobs:
 
     runs-on: ${{ matrix.os }}
 
+    permissions:
+      contents: read
+      packages: write
+
     steps:
       - name: Checkout (GitHub)
         uses: actions/checkout@v4
@@ -31,7 +36,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.REGISTRY_IMAGE }}
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -49,9 +54,8 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
-          # context: "{{defaultContext}}:${{ github.workspace }}" # tld
-          context: ./
-          # file: ./Dockerfile
+          context: .
           platforms: ${{ matrix.platform }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
