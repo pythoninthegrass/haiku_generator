@@ -139,6 +139,8 @@ exit
 * Generate more human-esque poems lmao
 * CI
   * Auto format (e.g., pep8)
+  * Re-add devcontainer
+    * Use `docker.yml` to build image
 * Write more tests
   * properties based ([hypothesis](https://youtu.be/mkgd9iOiICc?si=3Fpk7s7RvZZQtWB0&t=1120))
   * unit
@@ -158,3 +160,5 @@ exit
 [Typer](https://typer.tiangolo.com)
 
 [What you can generate and how — Hypothesis documentation](https://hypothesis.readthedocs.io/en/latest/data.html#)
+
+[Publishing Docker images - GitHub Docs](https://docs.github.com/en/actions/publishing-packages/publishing-docker-images#publishing-images-to-github-packages)

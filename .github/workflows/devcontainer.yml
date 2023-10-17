@@ -1,11 +1,11 @@
-# https://docs.github.com/en/actions/publishing-packages/publishing-docker-images#publishing-images-to-github-packages
+# https://github.com/devcontainers/ci/blob/main/docs/github-action.md
 
-name: 'docker'
-on: # rebuild any PRs and main branch changes
+name: 'devcontainer'
+on: # rebuild any PRs and dev branch changes
   pull_request:
   push:
     branches:
-      - main
+      - dev
   schedule: # rebuild once a week at midnight on saturday
     - cron: '0 0 * * 6'
 
@@ -14,7 +14,7 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  docker:
+  devcontainer:
     strategy:
       matrix:
         os: [ubuntu-latest]
@@ -37,15 +37,6 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          tags: |
-            type=raw,value=latest,enable={{is_default_branch}}
-            type=schedule
-            type=ref,event=branch
-            type=ref,event=pr
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=semver,pattern={{major}}
-            type=sha
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -60,11 +51,10 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push
-        uses: docker/build-push-action@v5
+      - name: Pre-build dev container image
+        uses: devcontainers/ci@v0.3
         with:
-          context: .
-          platforms: ${{ matrix.platform }}
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          imageName: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          cacheFrom: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          push: always
+          imageTag: dev,devcontainer,${{ github.sha }}
