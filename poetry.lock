@@ -1020,18 +1020,18 @@ tests = ["cython", "littleutils", "pygments", "pytest", "typeguard"]
 
 [[package]]
 name = "syllables"
-version = "1.0.7"
+version = "1.0.9"
 description = "A Python package for estimating the number of syllables in a word."
 optional = false
 python-versions = ">=3.7.2,<4.0.0"
 files = [
-    {file = "syllables-1.0.7-py3-none-any.whl", hash = "sha256:5840260d8b7a6416baa197980cbd3f88d4e3186c432610ae9e5aa0c05f2f510e"},
-    {file = "syllables-1.0.7.tar.gz", hash = "sha256:0ed0928e95bae0d4dbf11435777ee935012e6a35bf1dae6dd54fc55ddd58cd6c"},
+    {file = "syllables-1.0.9-py3-none-any.whl", hash = "sha256:341d1e5dd396589d385a8c462ea483081d344fa5652e02d29d1047a342c88d9b"},
+    {file = "syllables-1.0.9.tar.gz", hash = "sha256:e73be37d7420bd94cae1ec5511dc6392e1305fe0837a89def9bcabad27f91f6f"},
 ]
 
 [package.dependencies]
 cmudict = ">=1.0.11,<2.0.0"
-importlib-metadata = ">=5.1.0,<6.0.0"
+importlib-metadata = ">=5.1,<7.0"
 
 [[package]]
 name = "tqdm"
